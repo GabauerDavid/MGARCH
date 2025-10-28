@@ -1,0 +1,2 @@
+# MGARCH
+Multivariate GARCH
