@@ -25,6 +25,8 @@ install_github("GabauerDavid/MGARCH")
 rm(list=ls())
 
 library("zoo")
+library("MGARCH")
+library("rugarch")
 library("rmgarch")
 library("quantmod")
 
@@ -34,6 +36,9 @@ colnames(X) = c("SP500", "DAX")
 k = ncol(X)
 
 # DCC-GARCH (Tse and Tsui, 2002)
+ugarch_spec = ugarchspec(mean.model=list(armaOrder=c(0,0)), 
+                         variance.model=list(model="sGARCH", garchOrder=c(1,1)),
+                         distribution.model="norm")
 garch_fits = lapply(1:k, function(i) ugarchfit(spec=ugarch_spec, data=X[,i]))
 residuals = sapply(garch_fits, function(fit) residuals(fit))
 sigma = sapply(garch_fits, function(fit) sigma(fit))
@@ -47,9 +52,6 @@ R_tt = dcc_tt$R
 dates = as.Date(dimnames(R_tt)[[3]])
 
 # DCC-GARCH (Engle, 2002)
-ugarch_spec = ugarchspec(mean.model=list(armaOrder=c(0,0)), 
-                         variance.model=list(model="sGARCH", garchOrder=c(1,1)),
-                         distribution.model="norm")
 dcc_spec = dccspec(multispec(replicate(k, ugarch_spec)), dccOrder=c(1,1), 
                    distribution="mvnorm")
 dcc_fit = dccfit(dcc_spec, data=X)
