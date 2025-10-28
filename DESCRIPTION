@@ -1,0 +1,17 @@
+Package: MGARCH
+Type: Package
+Title: Multivariate GARCH
+Version: 1.0.0
+Date: 2025-10-29
+Authors@R: c(person("David", "Gabauer", email="david.gabauer@hotmail.com", role=c("aut","cre")))
+Maintainer: David Gabauer <david.gabauer@hotmail.com>
+Description: Provides estimation of the DCC-GARCH model of Tse and Tsui (2002).
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Depends: R (>= 4.3)
+Imports: rmgarch, rugarch, zoo
+Suggests: 
+    rmarkdown,
+    knitr
