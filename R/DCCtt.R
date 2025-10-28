@@ -2,9 +2,10 @@
 #' @description This function estimates the DCC-GARCH model of Tse and Tsui (2002)
 #' @param residuals Residuals of the univariate GARCH models
 #' @param sigma Conditional volatility of univariate GARCH models
-#' @param m Window size. Default is 1.
+#' @param window.size Window size. Default is 1.
 #' @return returns DCC-GARCH results
 #' @importFrom zoo index
+#' @importFrom stats cor cov optim pt
 #' @references
 #' Tse, Y. K., & Tsui, A. K. C. (2002). A multivariate generalized autoregressive conditional heteroscedasticity model with time-varying correlations. Journal of Business and Economic Statistics, 20(3), 351-362.
 #' @author David Gabauer
@@ -73,10 +74,11 @@ DCCtt = function(residuals, sigma, window.size=1) {
   
   # Get correlation and covariance matrix
   T = nrow(std_residuals)
+  k = ncol(std_residuals)
   H = R = array(NA, dim = c(k, k, T), dimnames=list(NAMES, NAMES, dates))
   R_bar = cor(std_residuals)
   R[,,1:window.size] = R_bar
-  H[,,1:window.size] = cov(X)
+  H[,,1:window.size] = cov(residuals)
   for (t in 2:T) {
     if (t<=window.size) {
       R[,,t] = R_bar

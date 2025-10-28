@@ -11,7 +11,7 @@ DCCtt(residuals, sigma, window.size = 1)
 
 \item{sigma}{Conditional volatility of univariate GARCH models}
 
-\item{m}{Window size. Default is 1.}
+\item{window.size}{Window size. Default is 1.}
 }
 \value{
 returns DCC-GARCH results
