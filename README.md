@@ -12,8 +12,7 @@ install.packages("devtools")
 
 ## Step 2: Install the package of interest from GitHub
 
-Install the package of interest from GitHub using the following code, where you need to remember to list both the author and the name of the package (in GitHub jargon, the package is the repo, which is short for repository). In this example, we are installing the ConnectednessApproach package created by GabauerDavid.
-
+Install the package of interest from GitHub using the following code:
 ```r
 library(devtools)
 install_github("GabauerDavid/MGARCH")
@@ -87,7 +86,7 @@ box()
 
 ## BibTeX Citation
 
-If you use this package in a scientific publication, I would appreciate if you use the following citation:
+If you use this package in a scientific publication, I would appreciate it if you use the following citation:
 
 ```
 @article{tse2002multivariate,
